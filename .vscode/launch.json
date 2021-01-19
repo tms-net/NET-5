@@ -1,0 +1,58 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch HomeWork11-TMS.ShopSimulator (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildHomeWork11",
+            "program": "${workspaceFolder}/HomeWorks/HomeWork11/TMS.ShopSimulator/bin/Debug/netcoreapp3.1/TMS.NET06.ShopSimulator.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "externalTerminal"
+        },
+        {
+            "name": "Launch Lesson-11-Multithreading (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildLesson11",
+            "program": "${workspaceFolder}/Lessons/Lesson-11-Multithreading/TMS.NET06.Lesson11.Multithreading/bin/Debug/netcoreapp3.1/TMS.NET06.Lesson11.Multithreading.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Lessons/Lesson-11-Multithreading/TMS.NET06.Lesson11.Multithreading",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Lesson-12-ParallelProgramming (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildLesson12",
+            "program": "${workspaceFolder}/Lessons/Lesson-12-ParallelProgramming/TMS.NET06.Lesson12.ParallelProgramming/bin/Debug/netcoreapp3.1/TMS.NET06.Lesson12.ParallelProgramming.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Lessons/Lesson-12-ParallelProgramming/TMS.NET06.Lesson12.ParallelProgramming",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Lesson-13-AsyncAwait (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildLesson13",
+            "program": "${workspaceFolder}/Lessons/Lesson-13-AsyncAwait/TMS.NET06.Lesson13.AsyncAwait/bin/Debug/netcoreapp3.1/win-x86/TMS.NET06.Lesson13.AsyncAwait.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/Lessons/Lesson-13-AsyncAwait/TMS.NET06.Lesson13.AsyncAwait",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}
