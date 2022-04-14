@@ -1,2 +1,2 @@
-# NET06
-Sample repository for NET06 group
+# NET15
+Sample repository for NET15 group
