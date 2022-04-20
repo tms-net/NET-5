@@ -3,15 +3,15 @@ using System;
 namespace MyApp 
 {
     internal class Program
-    {
+    {   
         public delegate double inByn(int a);
-        static public double fromDol(int a) => a * 0.3;
-        static public double fromEur(int a) => a * 0.4; 
+        static public double FromDol(int a) => a * 0.3;
+        static public double FromEur(int a) => a * 0.4; 
         static void Main(string[] args)
         {
             inByn byn,Byn;
-            byn = fromDol;
-            Byn = fromEur;  
+            byn = FromDol;
+            Byn = FromEur;  
             string? size1;
             int size;
             while (true)
@@ -31,7 +31,6 @@ namespace MyApp
             }
             Product[] product = new Product[size];
             Product product1 = new Product();
-            Product a = new Product();
             for (int i = 0; i < product.Length; i++)
             {
                 product1.create();
@@ -73,7 +72,10 @@ namespace MyApp
             Console.WriteLine("Введите имя продукта");
             Name = Console.ReadLine();
             Console.WriteLine("Введите стоимость продукта");
-            int.TryParse(name = Console.ReadLine(), out Cost);
+            while (true) { name = Console.ReadLine(); if (!int.TryParse(name, out Cost)) { Console.WriteLine("Повторите ввод"); } else { break; } }
+
+            }
+
         }
     }
-}
+
