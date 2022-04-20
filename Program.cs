@@ -1,12 +1,17 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
-
-namespace MyApp // Note: actual namespace depends on the project name.
+namespace MyApp 
 {
     internal class Program
     {
+        public delegate double inByn(int a);
+        static public double fromDol(int a) => a * 0.3;
+        static public double fromEur(int a) => a * 0.4; 
         static void Main(string[] args)
         {
+            inByn byn,Byn;
+            byn = fromDol;
+            Byn = fromEur;  
             string? size1;
             int size;
             while (true)
@@ -26,6 +31,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
             Product[] product = new Product[size];
             Product product1 = new Product();
+            Product a = new Product();
             for (int i = 0; i < product.Length; i++)
             {
                 product1.create();
@@ -37,7 +43,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
             for (int i = 0; i < product.Length; i++)
             {
                 Console.Write($"{product[i].Name} ");
-                Console.WriteLine($"по {product[i].Cost} руб\n");
+                Console.WriteLine($"по {product[i].Cost} руб");
+                Console.WriteLine($"стоимость {product[i].Name} в Долларах {byn(product[i].Cost)}");
+                Console.WriteLine($"стоимость {product[i].Name} в Евро {Byn(product[i].Cost)}\n");
             }
             Console.ReadLine();
                 }
@@ -47,25 +55,25 @@ namespace MyApp // Note: actual namespace depends on the project name.
     class Product
     {
         public string? Name;
-        public string? Cost;
+        public int Cost;
 
         public Product()
         {
             Name = "Ничего";
-            Cost = "Ybxtuj";
+            Cost = 0;
         }
-        public Product(string Name, string Cost)
+        public Product(string Name, int Cost)
         {
             this.Name = Name;
             this.Cost = Cost;
         }
         public void create()
         {
+            string? name;
             Console.WriteLine("Введите имя продукта");
             Name = Console.ReadLine();
             Console.WriteLine("Введите стоимость продукта");
-            Cost = Console.ReadLine();
-
+            int.TryParse(name = Console.ReadLine(), out Cost);
         }
     }
 }
