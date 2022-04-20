@@ -11,6 +11,7 @@ Console.WriteLine("Введите количество продуктов:");
 var prodNumber = int.Parse(Console.ReadLine());
 
 // TODO: Создать коллекцию или массив с нужным типом и количеством элементов
+// Пример: var products = new Product[3] // строчка создаст массив для 3-х объектов типа Product;
 for (int i = 0; i < prodNumber; i++)
 {
     Console.WriteLine("Введите данные продукта:");
