@@ -20,23 +20,25 @@ for (int i = 0; i < prodNumber; i++)
     products[i] = new Product();
     Console.WriteLine("Введите название продукта:");
     products[i].ProductName = Console.ReadLine();
+    Console.WriteLine("Введите производителя продукта:");
+    products[i].Producer = Console.ReadLine();
     Console.WriteLine("Введите цену продукта:");
     products[i].Price = double.Parse(Console.ReadLine());
     Console.WriteLine("Введите вес продукта:");
     products[i].Weight = double.Parse(Console.ReadLine());
-    Console.WriteLine("Введите производителя продукта:");
-    products[i].Producer = Console.ReadLine();
+ 
 
 
 }
 
-// Вывод введённых продуктов, вывод цены за 1 кг
+// расчёт цены за один  кг, вывод информациии о  всех продуктах
 Console.WriteLine("Ваши продукты");
 for (int i = 0; i < prodNumber; i++)
 {
 
-    products[i].Show();
+   
     products[i].CalculatePriceOfOneKg();
+    products[i].Show();
 
 
 }
@@ -49,14 +51,18 @@ public class Product
     public double Price;
     public double Weight;
     public string Producer = "";
+    public double PriceOfOneKg;
     public void Show()
     {
-        Console.WriteLine($"Продукт {ProductName} Цена {Price} Вес {Weight} Производитель {Producer}");
+        Console.WriteLine($"{ProductName} \"{Producer}\" Цена {Price:0.00} Вес {Weight:0.00} Цена за 1 кг {PriceOfOneKg:0.00}");
     }
+   
+    //расчёт цены за один кг
     public void CalculatePriceOfOneKg()
     {
-        Console.WriteLine("Цена за килограмм:{0}", Math.Round(Price / Weight, 2));
+        PriceOfOneKg= Math.Round(Price / Weight, 2);
 
     }
 
+    
 }
