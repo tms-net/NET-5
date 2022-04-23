@@ -27,11 +27,9 @@ for (int i = 0; i < prodNumber; i++)
     Console.WriteLine("Введите вес продукта:");
     products[i].Weight = double.Parse(Console.ReadLine());
  
-
-
 }
 
-// расчёт цены за один  кг, вывод информациии о  всех продуктах
+// расчёт цены за один кг, вывод информациии о продуктах
 Console.WriteLine("Ваши продукты");
 for (int i = 0; i < prodNumber; i++)
 {
@@ -54,7 +52,7 @@ public class Product
     public double PriceOfOneKg;
     public void Show()
     {
-        Console.WriteLine($"{ProductName} \"{Producer}\" Цена {Price:0.00} Вес {Weight:0.00} Цена за 1 кг {PriceOfOneKg:0.00}");
+        Console.WriteLine($"{ProductName} \"{Producer}\"  Цена {Price:0.00} Вес {Weight:0.00} Цена за 1 кг {PriceOfOneKg:0.00}");
     }
    
     //расчёт цены за один кг
