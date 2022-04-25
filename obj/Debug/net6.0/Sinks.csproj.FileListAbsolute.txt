@@ -1,0 +1,15 @@
+C:\mirmoek.by\Проекты\Sinks\Sinks\obj\Debug\net6.0\Sinks.csproj.AssemblyReference.cache
+C:\mirmoek.by\Проекты\Sinks\Sinks\obj\Debug\net6.0\Sinks.GeneratedMSBuildEditorConfig.editorconfig
+C:\mirmoek.by\Проекты\Sinks\Sinks\obj\Debug\net6.0\Sinks.AssemblyInfoInputs.cache
+C:\mirmoek.by\Проекты\Sinks\Sinks\obj\Debug\net6.0\Sinks.AssemblyInfo.cs
+C:\mirmoek.by\Проекты\Sinks\Sinks\obj\Debug\net6.0\Sinks.csproj.CoreCompileInputs.cache
+C:\mirmoek.by\Проекты\Sinks\Sinks\bin\Debug\net6.0\Sinks.exe
+C:\mirmoek.by\Проекты\Sinks\Sinks\bin\Debug\net6.0\Sinks.deps.json
+C:\mirmoek.by\Проекты\Sinks\Sinks\bin\Debug\net6.0\Sinks.runtimeconfig.json
+C:\mirmoek.by\Проекты\Sinks\Sinks\bin\Debug\net6.0\Sinks.dll
+C:\mirmoek.by\Проекты\Sinks\Sinks\bin\Debug\net6.0\Sinks.pdb
+C:\mirmoek.by\Проекты\Sinks\Sinks\obj\Debug\net6.0\Sinks.dll
+C:\mirmoek.by\Проекты\Sinks\Sinks\obj\Debug\net6.0\refint\Sinks.dll
+C:\mirmoek.by\Проекты\Sinks\Sinks\obj\Debug\net6.0\Sinks.pdb
+C:\mirmoek.by\Проекты\Sinks\Sinks\obj\Debug\net6.0\Sinks.genruntimeconfig.cache
+C:\mirmoek.by\Проекты\Sinks\Sinks\obj\Debug\net6.0\ref\Sinks.dll
