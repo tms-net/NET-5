@@ -31,11 +31,14 @@ namespace s
 
             ReklamaInfo obj = new ReklamaInfo(reklama: "Здесь могла быть ваша реклама");
             obj.WriteReklamaInfo();
-        }
+            }
 
-
-
-    }
+            
+            foreach(var item in list)
+            {
+                Console.WriteLine(String.Format("Имя: {0}, Цена: {1}", item.name, item.price));
+                
+            }
     interface IReklama
         {
             void WriteReklama();
@@ -43,19 +46,19 @@ namespace s
 
 
     class ReklamaInfo : IReklama
-    {
+        {
         string reklama;
 
         public ReklamaInfo(string reklama)
-        {
+            {
             this.reklama = reklama;
-        }
+            }
 
         void IReklama.WriteReklama()
             {
                 Console.WriteLine(reklama);
-            }
-
+        }
+        
         public void WriteReklamaInfo()
             {
             ReklamaInfo obj = new ReklamaInfo(reklama);
@@ -64,7 +67,7 @@ namespace s
             link1.WriteReklama();
              }
     }
-
+        
 
 
 
@@ -90,8 +93,8 @@ namespace s
                 }
             }
         }
-    }
-
+}
+   
     public class Name
     {
         public string name;
