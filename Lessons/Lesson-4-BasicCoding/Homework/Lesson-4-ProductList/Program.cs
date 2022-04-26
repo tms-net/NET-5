@@ -14,53 +14,89 @@ var prodNumber = int.Parse(Console.ReadLine());
 var products = new Product[prodNumber];
 // Заполнение аттрибутов продуктов с помощью ввода пользователя
 
+//roduct product = null;
 for (int i = 0; i < prodNumber; i++)
 
 {
-    products[i] = new Product();
+    Console.WriteLine("Введите тип продукта(спортивный,лекарство,косметика:");
+    var input = Console.ReadLine();
+    if (input == "лекарство")
+        products[i] = new Medicine();
+    else if (input == "спортивный")
+        products[i] = new Sport();
+    else if (input == "косметика")
+        products[i] = new Cosmetic();
     Console.WriteLine("Введите название продукта:");
     products[i].ProductName = Console.ReadLine();
-    Console.WriteLine("Введите производителя продукта:");
-    products[i].Producer = Console.ReadLine();
     Console.WriteLine("Введите цену продукта:");
     products[i].Price = double.Parse(Console.ReadLine());
-    Console.WriteLine("Введите вес продукта:");
-    products[i].Weight = double.Parse(Console.ReadLine());
- 
+
 }
 
-// расчёт цены за один кг, вывод информациии о продуктах
+
+// TODO: Использовать интерфейс, реализующий продукт (опционально)
+
+//  вывод информациии о продуктах
 Console.WriteLine("Ваши продукты");
 for (int i = 0; i < prodNumber; i++)
 {
-
-   
-    products[i].CalculatePriceOfOneKg();
     products[i].Show();
-
-
+}
+public interface IDisposable 
+{
+    void Dispose();
 }
 
-
 /// Класс, описывающий продукт.
-public class Product
+public abstract class Product
 {
     public string ProductName = "";
     public double Price;
-    public double Weight;
-    public string Producer = "";
-    public double PriceOfOneKg;
+ 
+    protected virtual string GetStorageConditions()
+    {
+        return "Отсутствуют особые условия хранения";
+     }
     public void Show()
     {
-        Console.WriteLine($"{ProductName} \"{Producer}\"  Цена {Price:0.00} Вес {Weight:0.00} Цена за 1 кг {PriceOfOneKg:0.00}");
+        Console.WriteLine($"Продукт: {ProductName}");
+        Console.WriteLine(GetStorageConditions());
+        Console.WriteLine($"Цена {Price:0.00}");
     }
    
-    //расчёт цены за один кг
-    public void CalculatePriceOfOneKg()
-    {
-        PriceOfOneKg= Math.Round(Price / Weight, 2);
-
-    }
 
     
 }
+
+public class Medicine : Product, IDisposable
+{
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override string GetStorageConditions() 
+    {
+        return "Хранить при температуре от 8 до 15 °С в недоступном для детей месте. ";
+    }
+
+}
+
+public class Cosmetic : Product
+{
+    protected override string GetStorageConditions()
+    {
+        return "Хранить при температуре от 5 до 25 °С.";
+    }
+}
+
+public class Sport : Product
+{
+    protected override string GetStorageConditions()
+    {
+        var storageConditions = base.GetStorageConditions();
+        return "Это спортивный товар и у него "+storageConditions;
+    }
+}
+
+ 
