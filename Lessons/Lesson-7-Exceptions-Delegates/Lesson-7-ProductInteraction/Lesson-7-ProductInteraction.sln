@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson-7-ProductInteraction", "Lesson-7-ProductInteraction.csproj", "{CBF69CDE-1B11-4736-AFFB-50EF2A789F42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson-7-ATM", "..\Lesson-7-ATM\Lesson-7-ATM.csproj", "{5B4098CF-7ED3-425C-923E-E9181F6169CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CBF69CDE-1B11-4736-AFFB-50EF2A789F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBF69CDE-1B11-4736-AFFB-50EF2A789F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBF69CDE-1B11-4736-AFFB-50EF2A789F42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B4098CF-7ED3-425C-923E-E9181F6169CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4098CF-7ED3-425C-923E-E9181F6169CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B4098CF-7ED3-425C-923E-E9181F6169CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B4098CF-7ED3-425C-923E-E9181F6169CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
