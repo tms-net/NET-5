@@ -13,13 +13,14 @@ public class ATMClient
     public ATMClient()
     {
         _random = new Random();
-        _actions = new Action[] { ViewAccount, WithdrawMoney, InsertMoney };
+        _actions = new Action[] { ViewAccount, ViewHistory, WithdrawMoney, InsertMoney };
     }
 
     public Action<string, int> modifyingAccount;
 
     public event Action<string> CardInserted;
     public event Action<int> ViewingAccount;
+    public event Action<HistoryViewingEventArgs> ViewingHistory;
     public event Action<AccountModifyingEventArgs> ModifyingAccount;
     public event Action<int> ModifiedAccount;
     public event Action<string> InvalidOperation;
@@ -31,7 +32,7 @@ public class ATMClient
         var numberOfActions = _random.Next(10);
         for (int i = 0; i < numberOfActions; i++)
         {
-            _actions[_random.Next(3)]();
+            _actions[_random.Next(4)]();
         }
     }
 
@@ -82,14 +83,108 @@ public class ATMClient
         }
     }
 
-    public class AccountModifyingEventArgs
+    private void ViewHistory()
     {
-        public AccountModifyingEventArgs(string cardNumber)
+        if (ViewingHistory != null)
         {
-            CardNumber = cardNumber;
+            var accountHistory = new AccountHistoryStateMachine();
+            try
+            {
+                while (accountHistory.NextOperation())
+                {
+                    ViewingHistory.Invoke(accountHistory.CurrentOperationArgs);
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                InvalidOperation?.Invoke(ex.Message);
+            }
         }
+    }
 
-        public int Amount { get; set; }
-        public string CardNumber { get; }
+    private class AccountHistoryStateMachine
+    {
+        private HistoryViewingEventArgs.HistoryOperation _currentOperation = default;
+
+        internal HistoryViewingEventArgs CurrentOperationArgs { get; private set; }
+
+        internal bool NextOperation()
+        {
+            if (CurrentOperationArgs != null)
+            {
+                _currentOperation = CurrentOperationArgs.NextOperation;
+            }
+
+            if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.Quit)
+            {
+                return false;
+            }
+
+            if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.NotSpecified)
+            {
+                CurrentOperationArgs = new HistoryViewingEventArgs
+                {
+                    AllowedOperations = new[] 
+                    {
+                        HistoryViewingEventArgs.HistoryOperation.TransactionHistory,
+                        HistoryViewingEventArgs.HistoryOperation.Quit
+                    }
+                };
+            }
+
+            if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.TransactionHistory)
+            {
+                CurrentOperationArgs.Data = "transactions"; // TODO: Заполнить данными о 5 первых операциях
+                CurrentOperationArgs.AllowedOperations = new[]
+                {
+                    HistoryViewingEventArgs.HistoryOperation.NextTransactions, // TODO: Проверить доступна ли операция
+                    HistoryViewingEventArgs.HistoryOperation.GoBack,
+                    HistoryViewingEventArgs.HistoryOperation.Quit
+                };
+            }
+
+            if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.NextTransactions)
+            {
+                CurrentOperationArgs.Data = "next transactions"; // TODO: Заполнить данными о 5 следующих операциях
+                CurrentOperationArgs.AllowedOperations = new[]
+                {
+                    HistoryViewingEventArgs.HistoryOperation.NextTransactions, // TODO: Проверить доступна ли операция
+                    HistoryViewingEventArgs.HistoryOperation.GoBack,
+                    HistoryViewingEventArgs.HistoryOperation.Quit
+                };
+            }
+
+            CurrentOperationArgs.CurrentOperation = _currentOperation;
+
+            return true;
+        }
+    }
+}
+
+public class AccountModifyingEventArgs
+{
+    public AccountModifyingEventArgs(string cardNumber)
+    {
+        CardNumber = cardNumber;
+    }
+
+    public int Amount { get; set; }
+    public string CardNumber { get; }
+}
+
+public class HistoryViewingEventArgs
+{
+    public string Data { get; internal set; }
+    public HistoryOperation[] AllowedOperations { get; internal set; }
+    public HistoryOperation CurrentOperation { get; internal set; }
+    public HistoryOperation NextOperation { get; set; }
+
+    public enum HistoryOperation
+    {
+        NotSpecified,
+        TransactionHistory,
+        NextTransactions,
+        GoBack,
+        Quit
     }
 }

@@ -4,7 +4,9 @@ public class ATMAccount
 {
     private const int MaxAmount = 100;
 
-    // Should have history of operations
+    // TODO: Создать возможность сохранять проведенные операции
+
+    // TODO: Создать возможность получить проведенные операции
 
     public string CardNumber { get; }
     public int Ballance { get; private set; }
@@ -17,6 +19,7 @@ public class ATMAccount
 
     public void WithdrawMoney(int amount)
     {
+        // TODO: Записать операцию
         if (Ballance < amount)
         {
             throw new InvalidOperationException("Недостаточно средств");
@@ -27,6 +30,7 @@ public class ATMAccount
 
     public void AddMoney(int amount)
     {
+        // TODO: Записать операцию
         if (amount > MaxAmount)
         {
             throw new InvalidOperationException("Превышен лимит пополнения");
