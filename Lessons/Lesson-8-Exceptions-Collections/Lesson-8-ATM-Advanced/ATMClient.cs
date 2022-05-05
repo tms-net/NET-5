@@ -87,7 +87,7 @@ public class ATMClient
     {
         if (ViewingHistory != null)
         {
-            var accountHistory = new AccountHistoryStateMachine();
+            var accountHistory = new AccountHistoryStateMachine(this._account);
             try
             {
                 while (accountHistory.NextOperation())
@@ -104,7 +104,14 @@ public class ATMClient
 
     private class AccountHistoryStateMachine
     {
+
         private HistoryViewingEventArgs.HistoryOperation _currentOperation = default;
+        private ATMAccount account;
+
+        public AccountHistoryStateMachine(ATMAccount account)
+        {
+            this.account = account;
+        }
 
         internal HistoryViewingEventArgs CurrentOperationArgs { get; private set; }
 
@@ -134,7 +141,21 @@ public class ATMClient
 
             if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.TransactionHistory)
             {
-                CurrentOperationArgs.Data = "transactions"; // TODO: Заполнить данными о 5 первых операциях
+                var data = this.account.History.ToString();
+
+                data = "";
+                data = data + "Всего оппераций " + this.account.History.Count.ToString();
+                Operation operation = null;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (i < this.account.History.Count)
+                    {
+                        operation = this.account.History[i];
+                        data = data + " Опперация номер " + i + operation;
+                    }
+                    
+                }
+                CurrentOperationArgs.Data = data; // TODO: Заполнить данными о 5 первых операциях
                 CurrentOperationArgs.AllowedOperations = new[]
                 {
                     HistoryViewingEventArgs.HistoryOperation.NextTransactions, // TODO: Проверить доступна ли операция
