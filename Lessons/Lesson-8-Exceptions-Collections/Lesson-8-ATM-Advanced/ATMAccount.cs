@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public class ATMAccount
 {
     private const int MaxAmount = 100;
-    public List<Operation> history = new List<Operation>();
+    public List<Operation> History { get; } = new List<Operation> ();
     public string CardNumber { get; }
     public int Ballance { get; private set; }
     public ATMAccount(string cardNumber)
@@ -32,7 +32,7 @@ public class ATMAccount
         {
             operation.Type = OperationType.WithDrow;
             operation.Balance = Ballance;
-            history.Add(operation);
+            History.Add(operation);
         }
     }
     public void AddMoney(int amount)
@@ -52,12 +52,13 @@ public class ATMAccount
         catch (Exception)
         {
             operation.Result = ResultType.Bad;
+            throw;
         }
         finally
         {
             operation.Type = OperationType.WithDrow;
             operation.Balance = Ballance;
-            history.Add(operation);
+            History.Add(operation);
         }
     }
 }
