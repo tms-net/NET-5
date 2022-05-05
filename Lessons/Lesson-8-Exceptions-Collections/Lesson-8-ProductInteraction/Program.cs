@@ -1,5 +1,5 @@
 ﻿using System.Text;
-
+using System;
 Console.OutputEncoding = Encoding.Unicode;
 Console.InputEncoding = Encoding.Unicode;
 

@@ -67,6 +67,14 @@ public class Operation
     public OperationType Type { get; set; }
     public int Balance { get; set; }
     public ResultType Result { get; set; }
+    public override string ToString()
+    {
+        string data; 
+        data = "" + this.Balance +" "+ this.Result + " " + this.Type;
+        return data;
+     
+    }
+
 }
 
 public enum OperationType
