@@ -1,41 +1,80 @@
 ﻿using System;
-
+using System.Collections.Generic;
 public class ATMAccount
 {
     private const int MaxAmount = 100;
-
-    // TODO: Создать возможность сохранять проведенные операции
-
-    // TODO: Создать возможность получить проведенные операции
-
+    public List<Operation> history = new List<Operation>();
     public string CardNumber { get; }
     public int Ballance { get; private set; }
-
     public ATMAccount(string cardNumber)
-    {     
+    {
         CardNumber = cardNumber;
         Ballance = 100;
     }
-
     public void WithdrawMoney(int amount)
     {
-        // TODO: Записать операцию
-        if (Ballance < amount)
+        var operation = new Operation();
+        try
         {
-            throw new InvalidOperationException("Недостаточно средств");
+            if (Ballance < amount)
+            {
+                throw new InvalidOperationException("Недостаточно средств");
+            }
+            Ballance -= amount;
+            operation.Result = ResultType.Good;
         }
-
-        Ballance -= amount;
+        catch (Exception)
+        {
+            operation.Result = ResultType.Bad;
+            throw;
+        }
+        finally
+        {
+            operation.Type = OperationType.WithDrow;
+            operation.Balance = Ballance;
+            history.Add(operation);
+        }
     }
-
     public void AddMoney(int amount)
     {
-        // TODO: Записать операцию
-        if (amount > MaxAmount)
+        var operation = new Operation();
+       
+        try
         {
-            throw new InvalidOperationException("Превышен лимит пополнения");
-        }
+            if (amount > MaxAmount)
+            {
+                throw new InvalidOperationException("Превышен лимит пополнения");
+            }
 
-        Ballance += amount;
+            Ballance += amount;
+            operation.Result = ResultType.Good;
+        }
+        catch (Exception)
+        {
+            operation.Result = ResultType.Bad;
+        }
+        finally
+        {
+            operation.Type = OperationType.WithDrow;
+            operation.Balance = Ballance;
+            history.Add(operation);
+        }
     }
+}
+public class Operation
+{
+    public OperationType Type { get; set; }
+    public int Balance { get; set; }
+    public ResultType Result { get; set; }
+}
+
+public enum OperationType
+{
+    Add,
+    WithDrow
+}
+public enum ResultType
+{
+    Good,
+    Bad
 }
