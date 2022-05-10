@@ -69,12 +69,10 @@ public class Operation
     public ResultType Result { get; set; }
     public override string ToString()
     {
-        string data; 
-        data = "" + this.Balance +" "+ this.Result + " " + this.Type;
-        return data;
-     
+        return string.Format(
+            "Балланс после операции: {0}, Тип операции: {1}, Результат: {2}",
+            Balance, Type, Result);
     }
-
 }
 
 public enum OperationType

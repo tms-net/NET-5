@@ -29,7 +29,7 @@ public class ATMClient
     {
         InsertCard();
 
-        var numberOfActions = _random.Next(10);
+        var numberOfActions = _random.Next(5, 10);
         for (int i = 0; i < numberOfActions; i++)
         {
             _actions[_random.Next(4)]();
@@ -106,11 +106,11 @@ public class ATMClient
     {
 
         private HistoryViewingEventArgs.HistoryOperation _currentOperation = default;
-        private ATMAccount account;
+        private ATMAccount _account;
 
         public AccountHistoryStateMachine(ATMAccount account)
         {
-            this.account = account;
+            this._account = account;
         }
 
         internal HistoryViewingEventArgs CurrentOperationArgs { get; private set; }
@@ -141,17 +141,14 @@ public class ATMClient
 
             if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.TransactionHistory)
             {
-                var data = this.account.History.ToString();
-
-                data = "";
-                data = data + "Всего оппераций " + this.account.History.Count.ToString();
-                Operation operation = null;
+                var data = "Всего оппераций " + this._account.History.Count.ToString();
+                
                 for (int i = 0; i < 5; i++)
                 {
-                    if (i < this.account.History.Count)
+                    if (i < _account.History.Count)
                     {
-                        operation = this.account.History[i];
-                        data = data + " Опперация номер " + i + operation;
+                        var operation = _account.History[i];
+                        data += "\nОперация номер " + (i + 1).ToString() + "\t\n" + operation.ToString();
                     }
                     
                 }
