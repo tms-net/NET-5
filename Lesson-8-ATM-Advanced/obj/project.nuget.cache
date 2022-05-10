@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "5O2tovbE3tfQ+xWlO3x3Moc15CvqRYScSLBS+lLeRd6T6rNH9EurNiPT04yhXq7Oq2NMmwfnAmoVwYdkelUTtA==",
+  "success": true,
+  "projectFilePath": "/Users/daniiltolkachev/Desktop/Lesson-8-Exceptions-Collections/Lesson-8-ATM-Advanced/Lesson-8-ATM-Advanced.csproj",
+  "expectedPackageFiles": [
+    "/Users/daniiltolkachev/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/Users/daniiltolkachev/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
