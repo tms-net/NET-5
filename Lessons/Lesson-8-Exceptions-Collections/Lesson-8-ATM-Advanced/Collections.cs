@@ -5,6 +5,10 @@ class Collections
 {
     void UseCollections()
     {
+        // Пример работы модификаторов доступа класса и свойства
+        //var accountHistory = new ATMClient.AccountHistoryStateMachine(new ATMAccount("123"));
+        //accountHistory.NextOperation();
+
         var array = new int[3]; // (123: (4 byte) (4 byte) (4 byte) )
         array[0] = 1;
         array[1] = 2;

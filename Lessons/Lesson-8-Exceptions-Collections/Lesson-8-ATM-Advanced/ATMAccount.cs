@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 public class ATMAccount
 {
     private const int MaxAmount = 100;
@@ -21,16 +22,16 @@ public class ATMAccount
                 throw new InvalidOperationException("Недостаточно средств");
             }
             Ballance -= amount;
-            operation.Result = ResultType.Good;
+            operation.Result = OperationResult.Success;
         }
         catch (Exception)
         {
-            operation.Result = ResultType.Bad;
+            operation.Result = OperationResult.Failure;
             throw;
         }
         finally
         {
-            operation.Type = OperationType.WithDrow;
+            operation.Type = OperationType.Withdraw;
             operation.Balance = Ballance;
             History.Add(operation);
         }
@@ -47,16 +48,16 @@ public class ATMAccount
             }
 
             Ballance += amount;
-            operation.Result = ResultType.Good;
+            operation.Result = OperationResult.Success;
         }
         catch (Exception)
         {
-            operation.Result = ResultType.Bad;
+            operation.Result = OperationResult.Failure;
             throw;
         }
         finally
         {
-            operation.Type = OperationType.WithDrow;
+            operation.Type = OperationType.Withdraw;
             operation.Balance = Ballance;
             History.Add(operation);
         }
@@ -66,7 +67,7 @@ public class Operation
 {
     public OperationType Type { get; set; }
     public int Balance { get; set; }
-    public ResultType Result { get; set; }
+    public OperationResult Result { get; set; }
     public override string ToString()
     {
         return string.Format(
@@ -78,10 +79,10 @@ public class Operation
 public enum OperationType
 {
     Add,
-    WithDrow
+    Withdraw
 }
-public enum ResultType
+public enum OperationResult
 {
-    Good,
-    Bad
+    Success,
+    Failure
 }
