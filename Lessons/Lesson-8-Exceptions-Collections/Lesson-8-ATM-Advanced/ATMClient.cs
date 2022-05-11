@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using static HistoryViewingEventArgs;
 
 /// <summary>
 /// Класс для эмуляции поведения пользователя банкомата.
@@ -13,7 +15,7 @@ public class ATMClient
     public ATMClient()
     {
         _random = new Random();
-        _actions = new Action[] { ViewAccount, ViewHistory, WithdrawMoney, InsertMoney };
+        _actions = new Action[] { ViewAccount, WithdrawMoney, InsertMoney };
     }
 
     public Action<string, int> modifyingAccount;
@@ -29,11 +31,13 @@ public class ATMClient
     {
         InsertCard();
 
-        var numberOfActions = _random.Next(5, 10);
+        var numberOfActions = _random.Next(10, 15);
         for (int i = 0; i < numberOfActions; i++)
         {
-            _actions[_random.Next(4)]();
+            _actions[_random.Next(3)]();
         }
+
+        ViewHistory();
     }
 
     private void InsertCard()
@@ -104,9 +108,12 @@ public class ATMClient
 
     private class AccountHistoryStateMachine
     {
+        private const int MaxHistoryOperations = 2;
+
+        private readonly ATMAccount _account;
 
         private HistoryViewingEventArgs.HistoryOperation _currentOperation = default;
-        private ATMAccount _account;
+        private int _currentOperationListPageIndex = -1;
 
         public AccountHistoryStateMachine(ATMAccount account)
         {
@@ -124,6 +131,7 @@ public class ATMClient
 
             if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.Quit)
             {
+                _currentOperationListPageIndex = -1;
                 return false;
             }
 
@@ -142,8 +150,29 @@ public class ATMClient
             if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.TransactionHistory)
             {
                 var data = "Всего оппераций " + this._account.History.Count.ToString();
-                
-                for (int i = 0; i < 5; i++)
+
+                var allowedOperations = new List<HistoryOperation>
+                    {
+                        HistoryViewingEventArgs.HistoryOperation.GoBack,
+                        HistoryViewingEventArgs.HistoryOperation.Quit
+                    };
+
+                if (this._account.History.Count > MaxHistoryOperations)
+                {
+                    allowedOperations.Insert(0, HistoryViewingEventArgs.HistoryOperation.NextTransactions);
+                    _currentOperationListPageIndex = 1;
+                }
+
+                #region UI flow
+                // [1,2,3]
+
+                // list -> операция 1
+                // next -> операция 2
+                // next -> операция 3
+                // back, quit
+                #endregion
+
+                for (int i = 0; i < MaxHistoryOperations; i++)
                 {
                     if (i < _account.History.Count)
                     {
@@ -152,24 +181,76 @@ public class ATMClient
                     }
                     
                 }
-                CurrentOperationArgs.Data = data; // TODO: Заполнить данными о 5 первых операциях
-                CurrentOperationArgs.AllowedOperations = new[]
-                {
-                    HistoryViewingEventArgs.HistoryOperation.NextTransactions, // TODO: Проверить доступна ли операция
-                    HistoryViewingEventArgs.HistoryOperation.GoBack,
-                    HistoryViewingEventArgs.HistoryOperation.Quit
-                };
+                CurrentOperationArgs.Data = data;
+                CurrentOperationArgs.AllowedOperations = allowedOperations.ToArray();
             }
 
             if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.NextTransactions)
             {
-                CurrentOperationArgs.Data = "next transactions"; // TODO: Заполнить данными о 5 следующих операциях
-                CurrentOperationArgs.AllowedOperations = new[]
+                var allowedOperations = new List<HistoryOperation>
                 {
-                    HistoryViewingEventArgs.HistoryOperation.NextTransactions, // TODO: Проверить доступна ли операция
                     HistoryViewingEventArgs.HistoryOperation.GoBack,
                     HistoryViewingEventArgs.HistoryOperation.Quit
                 };
+
+                #region Paging example
+                // items per page: 2 (Max)
+                // page number
+                //  [1,2, 3,4, 5] -> pageCount -> 5 % 2 = 1
+                //i: 0,1  2,3, 4
+
+                // 0:Max -> page 0 -> (pageIndex * Max: (pageIndex + 1) * Max - 1) -> (0 : 1)
+                // 2:3   -> page 1 -> (pageIndex * Max: ???) -> (2 : 3)
+                // 4     -> page 2 -> (pageIndex * Max: ???) -> (4 : 5)
+                #endregion
+
+                int pageIndex = this._currentOperationListPageIndex;
+
+                int pageCount = _account.History.Count / MaxHistoryOperations; // 5 / 2 = 2
+                
+                if (_account.History.Count % MaxHistoryOperations > 0)
+                {
+                    pageCount++;
+                }
+
+                #region Operator examples
+                // i *= 2 -> i = i * 2
+
+                // i = 0;
+                // var j = i++; // j = 0; i = 1;
+                // var j = ++i; // j =  1; i = 1;
+
+                // page count: 2
+                // [1,2] 
+                // page 0 -> [0:0]
+                // page 1 -> [1:1]
+                #endregion
+
+                var data = "Страница " + (pageIndex + 1) + ". Всего страниц " + pageCount;
+                for (int i = pageIndex * MaxHistoryOperations; i <= (pageIndex + 1) * MaxHistoryOperations - 1; i++)
+                {
+                    if (i < _account.History.Count)
+                    {
+                        var operation = _account.History[i];
+                        data += "\nОперация номер " + (i + 1).ToString() + "\t\n" + operation.ToString();
+                    }
+                }
+
+                this._currentOperationListPageIndex++;
+
+                if (pageIndex < pageCount - 1)
+                {
+                    allowedOperations.Insert(0, HistoryViewingEventArgs.HistoryOperation.NextTransactions);
+                }
+
+                CurrentOperationArgs.Data = data;
+                CurrentOperationArgs.AllowedOperations = allowedOperations.ToArray();
+
+            }
+
+            if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.GoBack)
+            {
+
             }
 
             CurrentOperationArgs.CurrentOperation = _currentOperation;

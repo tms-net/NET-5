@@ -1,7 +1,12 @@
 ﻿using System.Text;
 using System;
+
 Console.OutputEncoding = Encoding.Unicode;
 Console.InputEncoding = Encoding.Unicode;
+
+// Пример работы модификаторов доступа класса и свойства
+//var accountHistory = new ATMClient.AccountHistoryStateMachine(new ATMAccount("123"));
+//args = accountHistory.CurrentOperationArgs;
 
 Console.WriteLine("Hello, %Username%! Put your card into ATM!");
 
@@ -29,7 +34,8 @@ client.CardInserted += cardNumber =>
 
 client.ViewingHistory += args =>
 {
-    (string command, string title, string name) GetOperationInfo(HistoryViewingEventArgs.HistoryOperation operation) => operation switch
+    (string command, string title, string name) 
+        GetOperationInfo(HistoryViewingEventArgs.HistoryOperation operation) => operation switch
     {
         HistoryViewingEventArgs.HistoryOperation.NotSpecified => ("", "Добро пожаловать", ""),
         HistoryViewingEventArgs.HistoryOperation.TransactionHistory => ("list", "История транзакций:", "посмотреть историю"),
@@ -57,8 +63,9 @@ client.ViewingHistory += args =>
         var operationInfo = GetOperationInfo(operation);
         Console.WriteLine($"\t{operationInfo.command}: {operationInfo.name}");
     }
-    
-    args.NextOperation = Console.ReadLine() switch
+
+    var command = Console.ReadLine();
+    args.NextOperation = command switch
     {
         "list" => HistoryViewingEventArgs.HistoryOperation.TransactionHistory,
         "next" => HistoryViewingEventArgs.HistoryOperation.NextTransactions,
