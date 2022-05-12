@@ -250,7 +250,33 @@ public class ATMClient
 
             if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.GoBack)
             {
+               
+                var allowedOperations = new List<HistoryOperation>
+                {
+                    HistoryViewingEventArgs.HistoryOperation.NextTransactions,
+                    HistoryViewingEventArgs.HistoryOperation.GoBack,
+                    HistoryViewingEventArgs.HistoryOperation.Quit
+                };
+                int listCount = this._currentOperationListPageIndex - 2;
 
+                int pageCount = _account.History.Count / MaxHistoryOperations; // 5 / 2 = 2
+
+                if (_account.History.Count % MaxHistoryOperations > 0)
+                {
+                    pageCount++;
+                }
+                var data = "Страница " + (listCount+1) + ". Всего страниц " + pageCount;
+                for (int i = listCount + listCount; i <= listCount * 2 + 1; i++)
+                {
+                    if (i < _account.History.Count)
+                    {
+                        var operation = _account.History[i];
+                        data += "\nОперация номер " + (i + 1).ToString() + "\t\n" + operation.ToString();
+                    }
+                }
+                CurrentOperationArgs.Data = data;
+                CurrentOperationArgs.AllowedOperations = allowedOperations.ToArray();
+                this._currentOperationListPageIndex--;
             }
 
             CurrentOperationArgs.CurrentOperation = _currentOperation;
