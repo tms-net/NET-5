@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using static HistoryViewingEventArgs;
 
 /// <summary>
@@ -31,7 +32,7 @@ public class ATMClient
     {
         InsertCard();
 
-        var numberOfActions = _random.Next(10, 15);
+        var numberOfActions = _random.Next(5, 10);
         for (int i = 0; i < numberOfActions; i++)
         {
             _actions[_random.Next(3)]();
@@ -97,6 +98,11 @@ public class ATMClient
                 while (accountHistory.NextOperation())
                 {
                     ViewingHistory.Invoke(accountHistory.CurrentOperationArgs);
+                    
+                    if (!accountHistory.CurrentOperationArgs.IsValid())
+                    {
+                        throw new InvalidOperationException();
+                    }
                 }
             }
             catch (InvalidOperationException ex)
@@ -187,6 +193,7 @@ public class ATMClient
 
             if (_currentOperation == HistoryViewingEventArgs.HistoryOperation.NextTransactions)
             {
+                var data = "";
                 var allowedOperations = new List<HistoryOperation>
                 {
                     HistoryViewingEventArgs.HistoryOperation.GoBack,
@@ -207,42 +214,49 @@ public class ATMClient
                 int pageIndex = this._currentOperationListPageIndex;
 
                 int pageCount = _account.History.Count / MaxHistoryOperations; // 5 / 2 = 2
-                
-                if (_account.History.Count % MaxHistoryOperations > 0)
+
+                if (pageIndex < pageCount)
                 {
-                    pageCount++;
-                }
 
-                #region Operator examples
-                // i *= 2 -> i = i * 2
-
-                // i = 0;
-                // var j = i++; // j = 0; i = 1;
-                // var j = ++i; // j =  1; i = 1;
-
-                // page count: 2
-                // [1,2] 
-                // page 0 -> [0:0]
-                // page 1 -> [1:1]
-                #endregion
-
-                var data = "Страница " + (pageIndex + 1) + ". Всего страниц " + pageCount;
-                for (int i = pageIndex * MaxHistoryOperations; i <= (pageIndex + 1) * MaxHistoryOperations - 1; i++)
-                {
-                    if (i < _account.History.Count)
+                    if (_account.History.Count % MaxHistoryOperations > 0)
                     {
-                        var operation = _account.History[i];
-                        data += "\nОперация номер " + (i + 1).ToString() + "\t\n" + operation.ToString();
+                        pageCount++;
+                    }
+
+                    #region Operator examples
+                    // i *= 2 -> i = i * 2
+
+                    // i = 0;
+                    // var j = i++; // j = 0; i = 1;
+                    // var j = ++i; // j =  1; i = 1;
+
+                    // page count: 2
+                    // [1,2] 
+                    // page 0 -> [0:0]
+                    // page 1 -> [1:1]
+                    #endregion
+
+                    data = "Страница " + (pageIndex + 1) + ". Всего страниц " + pageCount;
+                    for (int i = pageIndex * MaxHistoryOperations; i <= (pageIndex + 1) * MaxHistoryOperations - 1; i++)
+                    {
+                        if (i < _account.History.Count)
+                        {
+                            var operation = _account.History[i];
+                            data += "\nОперация номер " + (i + 1).ToString() + "\t\n" + operation.ToString();
+                        }
+                    }
+
+                    this._currentOperationListPageIndex++;
+
+                    if (pageIndex < pageCount - 1)
+                    {
+                        allowedOperations.Insert(0, HistoryViewingEventArgs.HistoryOperation.NextTransactions);
                     }
                 }
-
-                this._currentOperationListPageIndex++;
-
-                if (pageIndex < pageCount - 1)
+                else
                 {
-                    allowedOperations.Insert(0, HistoryViewingEventArgs.HistoryOperation.NextTransactions);
+                    data = "Неверная страница"; 
                 }
-
                 CurrentOperationArgs.Data = data;
                 CurrentOperationArgs.AllowedOperations = allowedOperations.ToArray();
 
@@ -303,6 +317,8 @@ public class HistoryViewingEventArgs
     public HistoryOperation[] AllowedOperations { get; internal set; }
     public HistoryOperation CurrentOperation { get; internal set; }
     public HistoryOperation NextOperation { get; set; }
+
+    internal bool IsValid() => AllowedOperations.Contains(NextOperation);
 
     public enum HistoryOperation
     {
