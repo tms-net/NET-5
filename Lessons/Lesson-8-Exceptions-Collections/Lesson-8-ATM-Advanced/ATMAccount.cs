@@ -4,7 +4,9 @@ using System.Collections.Generic;
 public class ATMAccount
 {
     private const int MaxAmount = 100;
-    public List<Operation> History { get; } = new List<Operation> ();
+    private List<Operation> _history = new();
+
+    public IEnumerable<Operation> History => _history;
     public string CardNumber { get; }
     public int Ballance { get; private set; }
     public ATMAccount(string cardNumber)
@@ -33,7 +35,7 @@ public class ATMAccount
         {
             operation.Type = OperationType.Withdraw;
             operation.Balance = Ballance;
-            History.Add(operation);
+            _history.Add(operation);
         }
     }
     public void AddMoney(int amount)
@@ -59,7 +61,7 @@ public class ATMAccount
         {
             operation.Type = OperationType.Withdraw;
             operation.Balance = Ballance;
-            History.Add(operation);
+            _history.Add(operation);
         }
     }
 }
