@@ -1,0 +1,16 @@
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/bin/Debug/net5.0/Lesson-11-RecruitmentApp
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/bin/Debug/net5.0/Lesson-11-RecruitmentApp.deps.json
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/bin/Debug/net5.0/Lesson-11-RecruitmentApp.runtimeconfig.json
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/bin/Debug/net5.0/Lesson-11-RecruitmentApp.runtimeconfig.dev.json
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/bin/Debug/net5.0/Lesson-11-RecruitmentApp.dll
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/bin/Debug/net5.0/Lesson-11-RecruitmentApp.pdb
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/obj/Debug/net5.0/Lesson-11-RecruitmentApp.csproj.AssemblyReference.cache
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/obj/Debug/net5.0/Lesson-11-RecruitmentApp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/obj/Debug/net5.0/Lesson-11-RecruitmentApp.AssemblyInfoInputs.cache
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/obj/Debug/net5.0/Lesson-11-RecruitmentApp.AssemblyInfo.cs
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/obj/Debug/net5.0/Lesson-11-RecruitmentApp.csproj.CoreCompileInputs.cache
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/obj/Debug/net5.0/Lesson-11-RecruitmentApp.dll
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/obj/Debug/net5.0/refint/Lesson-11-RecruitmentApp.dll
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/obj/Debug/net5.0/Lesson-11-RecruitmentApp.pdb
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/obj/Debug/net5.0/Lesson-11-RecruitmentApp.genruntimeconfig.cache
+/Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/obj/Debug/net5.0/ref/Lesson-11-RecruitmentApp.dll
