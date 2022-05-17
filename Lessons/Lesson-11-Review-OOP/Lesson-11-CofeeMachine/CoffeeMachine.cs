@@ -24,7 +24,7 @@ namespace Lesson_11_CofeeMachine
             Console.WriteLine("Количество воды: {0} грамм", gramsOfWater);
             Console.WriteLine("Количество молока: {0} грамм", gramsOfMilk);
             Console.WriteLine("Готовый напиток: {0} мл", MakeDrink());
-            Console.WriteLine("Кушай, не обляпайся");
+            Console.WriteLine("**************");
         }
         public enum drink
         {
