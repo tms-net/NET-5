@@ -1,0 +1,10 @@
+is_global = true
+build_property.TargetFramework = net5.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Lesson_11_RecruitmentApp
+build_property.ProjectDir = /Users/daniiltolkachev/Desktop/git/NET-15/Lessons/Lesson-11-Review-OOP/Lesson-11-RecruitmentApp/
