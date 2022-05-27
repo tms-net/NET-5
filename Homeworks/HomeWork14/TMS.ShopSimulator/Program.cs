@@ -6,26 +6,22 @@ namespace TMS.ShopSimulator
 {
     class Program
     {
-	    static int AvailableThreads
-	    {
-		    get
-		    {
-			    ThreadPool.GetAvailableThreads(out int availableThreads, out _);
-			    return availableThreads;
-		    }
-	    }
-
-	    static int MaxThreads
-	    {
-		    get
-		    {
-			    ThreadPool.GetMaxThreads(out int maxThreads, out _);
-			    return maxThreads;
-		    }
-	    }
-
         static void Main(string[] args)
         {
+            var random = new Random();
+            var shop = new Shop(3);
+
+            shop.Open();
+
+            for (int i = 0; i < 100; i++)
+            {
+                var person = new Person(random.Next(100, 1000), i + 1);
+                shop.Enter(person);
+
+                Thread.Sleep(100);
+            }
+
+            shop.Close();
         }
     }
 }
