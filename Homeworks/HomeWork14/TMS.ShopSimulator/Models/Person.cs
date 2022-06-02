@@ -1,4 +1,4 @@
-﻿namespace TMS.ShopSimulator
+﻿namespace TMS.NET15.ShopSimulator
 {
     public class Person
     {
