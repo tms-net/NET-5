@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 
 namespace TMS.NET15.ShopSimulator
 {
-    public class TaskShopWithDistributionAndContinuation
+    public class TaskShopWithDistributionAndContinuation : IDisposable
     {
         private bool _isOpened;
         private Task[] _cashierTasks;
         private Random _random;
         private CancellationTokenSource _cancellation;
         private Task _lastTask;
+        private bool disposedValue;
 
         public TaskShopWithDistributionAndContinuation(int cashierCount)
         {
@@ -39,6 +40,8 @@ namespace TMS.NET15.ShopSimulator
                     ref _cashierTasks[_random.Next(0, _cashierTasks.Length)],
                     Task.WhenAny(_cashierTasks)
                         .ContinueWith(task =>
+                        //ServeCustomer(person, _cancellation.Token)
+                        //Task.Run(() =>
                         {
                             var newTask = ServeCustomer(person, _cancellation.Token);
 
@@ -46,6 +49,7 @@ namespace TMS.NET15.ShopSimulator
 
                             return newTask;
                         })
+                    //);
                         .Unwrap());
 
                 Console.WriteLine($"{person.Name} вошел в магазин");
@@ -64,7 +68,7 @@ namespace TMS.NET15.ShopSimulator
             Console.WriteLine("Полное закрытия");
         }
 
-        private async Task ServeCustomer(Person person, CancellationToken cancellationToken)
+        private async Task<double> ServeCustomer(Person person, CancellationToken cancellationToken)
         {
             try
             {
@@ -76,6 +80,38 @@ namespace TMS.NET15.ShopSimulator
             {
                 Console.WriteLine($"Клиент {person.Name} был обслужен с ошибкой: {ex.Message}");
             }
+
+            return _random.NextDouble() * 100;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                    _cancellation.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        ~TaskShopWithDistributionAndContinuation()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: false);
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

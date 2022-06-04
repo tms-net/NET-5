@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace TMS.NET15.ShopSimulator
 {
     public class ThreadPoolShopWithConcurrentQueue
     {
         private int _cashierCount;
+        private int _openedCashierCount;
         private ConcurrentQueue<Person> _peopleQueue; // Эмуляция очереди клиентов
         private bool _isOpened;
-        private int _closedCashiers;
 
         public ThreadPoolShopWithConcurrentQueue(int cashierCount)
         {
             _peopleQueue = new ConcurrentQueue<Person>();
             _cashierCount = cashierCount;
+            _openedCashierCount = -1;
         }
 
         public void Open()
         {
+            _openedCashierCount = _cashierCount;
             _isOpened = true;
             for (int i = 0; i < _cashierCount; i++)
             {
@@ -54,7 +54,7 @@ namespace TMS.NET15.ShopSimulator
             }
 
             var closeTimer = Stopwatch.StartNew();
-            while(_cashierCount > 0)
+            while(_openedCashierCount > 0)
             {
                 Console.WriteLine($"Время после последнего клиента: {closeTimer.Elapsed.TotalSeconds}");
                 Thread.Sleep(200);
@@ -91,7 +91,7 @@ namespace TMS.NET15.ShopSimulator
 
             Console.WriteLine($"Кассир {cashier} заканчивает работу");
 
-            Interlocked.Decrement(ref _cashierCount);
+            Interlocked.Decrement(ref _openedCashierCount);
         }
     }
 }

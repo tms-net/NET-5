@@ -24,7 +24,7 @@ namespace TMS.NET15.ShopSimulator
 
         public ThreadPoolShopWithSemaphore(int cashierCount)
         {
-            _semaphore = new SemaphoreSlim(cashierCount);
+            _semaphore = new SemaphoreSlim(cashierCount, cashierCount);
             _cashierCount = cashierCount;
         }
 
@@ -69,6 +69,19 @@ namespace TMS.NET15.ShopSimulator
 
             Console.WriteLine("Полное закрытия");
         }
+
+        // max: 2
+        // available: 2
+
+        // threads/people: 4
+
+        //1: Wait -> OK | available: 1
+
+        //2: Wait -> Waiting -> OK | available: 0
+
+        //3: Wait -> OK | available: 0 -> Release | available: 1 
+
+        //4: Wait -> Waiting
 
         private void ServeCustomer(object personObj)
         {

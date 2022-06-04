@@ -19,7 +19,7 @@ namespace TMS.NET15.ShopSimulator
             for (int i = 0; i < cashierCount; i++)
             {
                 _cahierThreads[i] = new Thread(ServeCustomer);
-                _cahierThreads[i].IsBackground = true;
+                //_cahierThreads[i].IsBackground = true;
             }
         }
 

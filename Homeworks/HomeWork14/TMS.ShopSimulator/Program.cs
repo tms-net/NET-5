@@ -9,18 +9,18 @@ namespace TMS.ShopSimulator
 {
     class Program
     {
-        static void Main(string[] args)
+        static void MainProgram(string[] args)
         {
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
 
             var random = new Random();
-            var shop = new ThreadShopWithQueue(3);
+            //var shop = new ThreadShopWithQueue(3);
             //var shop = new ThreadShopWithConcurrentQueue(3);
             //var shop = new ThreadPoolShopWithConcurrentQueue(3);
             //var shop = new ThreadPoolShopWithSemaphore(3);
             //var shop = new TaskShopWithSemaphoreAndCancellationToken(3);
-            //var shop = new TaskShopWithDistributionAndContinuation(3);
+            var shop = new TaskShopWithDistributionAndContinuation(3);
 
             Task.Run(() =>
             {
