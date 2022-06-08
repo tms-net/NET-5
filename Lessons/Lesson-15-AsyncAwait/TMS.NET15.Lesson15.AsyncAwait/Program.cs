@@ -14,11 +14,20 @@ namespace TMS.NET15.Lesson15.AsyncAwait
 {
 	class Program
 	{
-		private static Task<int> Main(string[] args)
-		{
-            Console.WriteLine("Hello world!!");
-            return Task.FromResult(0);
-		}
+        // Rename to Main in order to run as console app
+		static void MainOld(string[] args)
+        {
+            Console.WriteLine("Hello world!");
+            int i = 1;
+            while (true)
+            {
+                new Thread(obj =>
+                {
+                    while (true) Thread.Sleep(100);
+                }).Start();
+                Console.WriteLine($"{i++}: {Process.GetCurrentProcess().PagedMemorySize64 / 2048}MB");
+            }
+        }  
 	}
 }
 

@@ -22,9 +22,9 @@ namespace TMS.NET15.ShopSimulator
             for (int i = 0; i < 100; i++)
             {
                 Thread.Sleep(10);
-                tasks[i] = Task.Run(() => SimpleMethod1());
+                //tasks[i] = Task.Run(() => SimpleMethod1());
 
-                //tasks[i] = Task.Run(() => SimpleMethod2());
+                tasks[i] = Task.Run(() => SimpleMethod2());
             }
 
             var wait = Task.WhenAll(tasks);
@@ -44,7 +44,14 @@ namespace TMS.NET15.ShopSimulator
 
         private static async Task Download1(string url)
         {
-            await Task.Delay(100);
+            try
+            {
+                await Task.Delay(100);
+            }
+            catch
+            {
+                await Task.Delay(300);
+            }
 
             //textBlock = "Downloaded";
         }
@@ -61,12 +68,13 @@ namespace TMS.NET15.ShopSimulator
             await Task.Delay(_random.Next(200, 1000));
 
             Console.WriteLine("Второй этап");
-
         }
 
         private static void SimpleMethod2()
         {
             Task.Delay(_random.Next(200, 1000)).Wait();
+
+            //Thread.Sleep(_random.Next(200, 1000));
 
             Console.WriteLine("Второй этап");
         }

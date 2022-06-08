@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET15.Lesson14.Parallel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET15.Lesson15.AsyncAwait", "Lesson-15-AsyncAwait\TMS.NET15.Lesson15.AsyncAwait\TMS.NET15.Lesson15.AsyncAwait.csproj", "{CAF480D5-E07A-4C9C-B603-5C0B6B164F56}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET15.Lesson15.AsyncAwait.Wpf", "Lesson-15-AsyncAwait.Wpf\TMS.NET15.Lesson15.AsyncAwait.Wpf.csproj", "{A6C8A46F-9BB8-4634-9523-19A3BC08774F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CAF480D5-E07A-4C9C-B603-5C0B6B164F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAF480D5-E07A-4C9C-B603-5C0B6B164F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAF480D5-E07A-4C9C-B603-5C0B6B164F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6C8A46F-9BB8-4634-9523-19A3BC08774F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6C8A46F-9BB8-4634-9523-19A3BC08774F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6C8A46F-9BB8-4634-9523-19A3BC08774F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6C8A46F-9BB8-4634-9523-19A3BC08774F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

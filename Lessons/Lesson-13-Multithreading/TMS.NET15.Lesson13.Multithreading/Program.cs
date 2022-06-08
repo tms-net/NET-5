@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace TMS.NET15.Lesson13.Multithreading
 {
-    class Program
+    static class Program
     {
         // An immutable object is one whose state cannot be altered — externally or internally.
         // Immutability is a hallmark of functional programming — where instead of mutating an object,
