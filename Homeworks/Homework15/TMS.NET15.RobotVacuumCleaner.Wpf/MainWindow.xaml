@@ -1,0 +1,34 @@
+﻿<Window x:Class="TMS.NET15.RobotVacuumCleaner.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TMS.NET15.RobotVacuumCleaner.Wpf"
+        mc:Ignorable="d" Loaded="Window_Loaded" DataContext="this"
+        Title="MainWindow" Height="600" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <ToggleButton HorizontalAlignment="Left" Padding="20" Margin="10,0,20,0" FontSize="24" 
+                          Width="200"
+                          Content="Включить" 
+                          Checked="ToggleButton_Checked" 
+                          Unchecked="ToggleButton_Unchecked"/>
+
+            <Button Width="200" Padding="20" FontSize="14" Content="Начать Уборку" Command="{Binding RobotCommand}" CommandParameter="StartCleaning"/>
+            <Button Width="200" Padding="20" Margin="20,0" FontSize="14" Content="Закончить Уборку" Command="{Binding RobotCommand}" CommandParameter="FinishCleaning"/>
+            <Button Width="200" Padding="20" FontSize="14" Content="Вернуться на зарядку" Command="{Binding RobotCommand}" CommandParameter="ReturnToChargingDock"/>
+        </StackPanel>
+        <TextBox Grid.Row="1" Width="Auto"
+            Name="txtConsole"
+            TextWrapping="Wrap"
+            IsEnabled="False"
+            VerticalScrollBarVisibility="Auto"
+            BorderThickness="0"
+            Margin="0,10,0,0"
+        />
+    </Grid>
+</Window>
