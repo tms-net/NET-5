@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET15.Lesson16.Reflection", "Lesson16.Reflection\TMS.NET15.Lesson16.Reflection.csproj", "{E2E894B3-1235-4CC0-A0E5-715F810E71EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET15.Lesson16.Serialization", "Lesson16.Serialization\TMS.NET15.Lesson16.Serialization.csproj", "{36F0680C-3B58-4F2F-BCC6-CAB2FB5AFFF1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2E894B3-1235-4CC0-A0E5-715F810E71EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2E894B3-1235-4CC0-A0E5-715F810E71EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2E894B3-1235-4CC0-A0E5-715F810E71EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2E894B3-1235-4CC0-A0E5-715F810E71EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36F0680C-3B58-4F2F-BCC6-CAB2FB5AFFF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36F0680C-3B58-4F2F-BCC6-CAB2FB5AFFF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36F0680C-3B58-4F2F-BCC6-CAB2FB5AFFF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36F0680C-3B58-4F2F-BCC6-CAB2FB5AFFF1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6DB0B79C-F64C-4363-9FCE-E9E0AF4436DA}
+	EndGlobalSection
+EndGlobal
