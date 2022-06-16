@@ -25,7 +25,7 @@
         <TextBox Grid.Row="1" Width="Auto"
             Name="txtConsole"
             TextWrapping="Wrap"
-            IsEnabled="False"
+            IsEnabled="True"
             VerticalScrollBarVisibility="Auto"
             BorderThickness="0"
             Margin="0,10,0,0"
