@@ -12,9 +12,19 @@ namespace TMS.NET15.CsvService.Services
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "CsvService");
 
+        public CsvService()
+        {
+            if (!Directory.Exists(_rootPath))
+            {
+                Directory.CreateDirectory(_rootPath);
+            }
+        }
+
         public void Persist<T>(IEnumerable<T> models)
         {
-            var path = Path.Combine(_rootPath, DateTime.Now.ToString(), ".csv");
+            var path = Path.Combine(
+                _rootPath, 
+                DateTime.Now.ToString("yyyy-dd-MM_hh-mm-ss") + ".csv");
             using (var fs = new FileStream(path, FileMode.Create))
             {
                 fs.Write(Encoding.UTF8.GetBytes(CsvSerializer.Serialize(models)));

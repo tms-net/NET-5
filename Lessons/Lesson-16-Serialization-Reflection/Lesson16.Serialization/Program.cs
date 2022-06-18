@@ -4,15 +4,65 @@ using System.Text.Json.Serialization;
 
 namespace TMS.NET15.Lesson16.Serialization
 {
-	public class JsonClass
+    
+
+    //[Description]
+    public class JsonClass
     {
+        public JsonClass()
+        {
+            var xml =
+                @"
+                <JsonClass 'StringProp'='sgifn' 'numProp'='3'>
+                    <objProp>
+                    </objProp>
+                </JsonClass>";
+
+            var json =
+                @"
+                {
+                    'StringProp': 'sgifn',
+                    'numProp': 3,
+                    'objProp':
+                        {
+                        },
+                    'arrayProp': [{'anotherNumProp': 5}],
+                    'boolProp': true
+                }";
+        }
+
         [JsonPropertyName("stringProp")]
-	    public string StringProp { get; set; }
-	    public int numProp { get; set; }
-	    public object objProp { get; set; }
-	    public object[] arrayProp { get; set; }
+        //[Description(Description = "Description"), Description(Type = ObjectType.Regular)]
+        //[Description(Handler = typeof(JsonClass))]
+        public string StringProp { get; set; }
+        public int numProp { get; set; }
+        public object objProp { get; set; }
+        public object[] arrayProp { get; set; }
+
+        [JsonIgnore]
         public bool boolProp { get; set; }
         public object unknownProp { get; set; }
+    }
+
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+    public class DescriptionAttribute : Attribute
+    {
+        public string Description { get; set; }
+
+        public ObjectType Type { get; set; }
+
+        public Type Handler { get; set; }
+
+
+        public string GetDescription()
+        {
+            return $"Attribute:{Description}";
+        }
+    }
+
+    public enum ObjectType
+    {
+        Regular
     }
 
     class Program
@@ -24,6 +74,16 @@ namespace TMS.NET15.Lesson16.Serialization
         // - array with different types (JsonElement, etc.)
         // - serialization exceptions
         
+        // Binary in memory
+        //  (1,2,ref1) ...... (ref1:3,4)
+        
+        // Binary -> [..1,2,..3]
+        
+        // Text -> "1,2,3"
+            // XML
+            // JSON
+            // HTML
+            // CSV
 
         static void Main(string[] args)
         {
@@ -42,8 +102,11 @@ namespace TMS.NET15.Lesson16.Serialization
 
             try
             {
-	            var obj = JsonSerializer.Deserialize<JsonClass>(json);
+	            var obj = JsonSerializer.Deserialize<JsonClass>(json,
+                    new JsonSerializerOptions()
+                    );
 	            obj.StringProp = "for serialization";
+                obj.boolProp = true;
                 Console.WriteLine(JsonSerializer.Serialize(obj));
             }
             catch (Exception ex)
