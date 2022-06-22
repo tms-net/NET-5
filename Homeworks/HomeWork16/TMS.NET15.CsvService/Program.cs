@@ -6,8 +6,9 @@ using TMS.NET15.CsvService.Services;
 Console.WriteLine("Hello, Serialization!");
 
 var random = new Random();
-var csvServie = new CsvService();
+var csvServie = new CsvStoreService(new CsvSerializer());
 var products = new List<OrderProduct>();
+var order = new Order();
 
 // TODO: Создать заказ с помощью пользователя
 
@@ -22,8 +23,14 @@ for (int i = 0; i < random.Next(5,15); i++)
     });
 }
 
+order.Products = products.ToArray();
+order.Delivery = new DeliveryInfo
+{
+    Address = "Minsk",
+    Price = 10
+};
 
-csvServie.Persist(products);
+csvServie.Persist(new [] { order });
 
 foreach (var item in csvServie.Read<OrderProduct>())
 {
