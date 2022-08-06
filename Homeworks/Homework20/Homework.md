@@ -1,5 +1,5 @@
 ﻿# Javascript
-Создайте свое резюме (или переиспользуйте резкльтат своего [домашнего задания](https://github.com/tms-net/NET-15/blob/main/Homeworks/Homework17/Homework.md)), используя Javascript и возможность изменять Объектную Модель Документов (DOM).
+Создайте свое резюме (или переиспользуйте результат своего [домашнего задания](https://github.com/tms-net/NET-15/blob/main/Homeworks/Homework17/Homework.md)), используя Javascript и возможность изменять Объектную Модель Документов (DOM).
 
 **Пример структуры DOM**
 - Блок личных данных
