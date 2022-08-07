@@ -15,3 +15,18 @@ function Product(type, price) {
     console.log(p2.getInfo());
     console.log(p3.getInfo());
     console.log(p4.getInfo());
+
+    //----------------------------------
+    // Part2
+
+    class Product 
+    {
+        constructor(type, price)
+        {
+            if (type !== undefined) 
+            {
+
+            }
+        }
+        fullInfo ()
+    }
