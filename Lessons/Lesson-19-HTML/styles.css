@@ -1,0 +1,35 @@
+.mobile-menu {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .mobile-menu {
+        display: block;
+    }
+
+    .main-menu {
+        display: none;
+    }
+}
+
+mytag {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+.list-item {
+    list-style: circle;
+    display: list-item;
+}
+
+td, th {
+    border: 1px solid;
+}
+
+th {
+    background-color: gray;
+}
+
