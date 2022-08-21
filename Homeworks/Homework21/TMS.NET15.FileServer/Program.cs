@@ -2,7 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
-app.UseStaticFiles();
+app.UseStaticFiles(); //я его сюда не ставил, но без него не работает
 
 app.MapGet("/", async context =>
 {
@@ -13,6 +13,6 @@ app.MapGet("/", async context =>
     context.Response.StatusCode = 200;
     await context.Response.WriteAsync(fileContent);
 });
-app.MapGet("/content/file", (string file) => File.ReadAllText($"content/{file}"));
+app.MapGet("/Text/file", (string file) => File.ReadAllText($"Text/{file}")); // работает без этого, можно отключить
 
 app.Run();

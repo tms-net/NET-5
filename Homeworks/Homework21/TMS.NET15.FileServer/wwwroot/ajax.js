@@ -2,7 +2,7 @@ function updateDisplay(verse) {
     const poemDisplay = document.querySelector('pre');
 
     verse = verse.replace(' ', '').toLowerCase();
-    const url = `${verse}.txt`;
+    const url = `Text/${verse}.txt`;
 
     console.log(url);
 
