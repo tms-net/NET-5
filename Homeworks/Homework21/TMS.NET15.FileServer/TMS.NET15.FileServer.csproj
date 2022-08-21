@@ -6,14 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Html\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="wwwroot\ajax.html">
+    <Content Update="wwwroot\Html\ajax.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\ajax.js">
+    <Content Update="wwwroot\Js\ajax.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
