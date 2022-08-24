@@ -1,17 +1,22 @@
 
+using TMS.NET15.FileServer;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.Add<CsvConfigurationSource>(sourse => { });
 
 builder.Logging.ClearProviders();
+
 builder.Logging.AddConsole();
 
+builder.Logging.AddProvider(new FileLoggerProvider());
 
 var app = builder.Build();
 
 
 app.Use(async (context, next) =>
 {
-    var logger = context.RequestServices.GetService<ILogger>();
+    var logger = context.RequestServices.GetService<ILogger<Program>>();
 
     logger.LogInformation($"Request:{context.Request.Path}");
 
