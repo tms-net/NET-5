@@ -1,0 +1,25 @@
+{
+  "name": "bootstrap-weather",
+  "version": "1.0.0",
+  "description": "Responsive Weather templates built with the latest Bootstrap 5. Examples of UI with icons, cards, real data from API, interactive animated backgrounds.",
+  "main": "basic.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdbootstrap/bootstrap-weather.git"
+  },
+  "keywords": [
+    "bootstrap",
+    "weather",
+    "bootstrap5",
+    "weather-card-templates"
+  ],
+  "author": "mdbootstrap",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdbootstrap/bootstrap-weather/issues"
+  },
+  "homepage": "https://mdbootstrap.com/docs/standard/extended/weather/"
+}

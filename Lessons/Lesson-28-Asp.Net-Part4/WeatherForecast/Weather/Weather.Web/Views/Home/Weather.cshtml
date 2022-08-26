@@ -1,0 +1,131 @@
+﻿@using System.Globalization
+@model WeatherViewModel
+
+@{
+    ViewData["Title"] = $"Погода в {Model.Location}";
+
+    var weatherTypeImg = Model.WeatherType switch
+    {
+        WeatherType.Sunny => "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu3.webp",
+        WeatherType.Cloudy => "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu3.webp",
+        WeatherType.Rain => "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu3.webp",
+        _ => "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu3.webp"
+    };
+}
+
+<div class="container py-5 h-100">
+  
+      <div class="row d-flex justify-content-center align-items-center h-100" style="color: #282828;">
+        <div class="col-md-9 col-lg-7 col-xl-5">
+  
+          <div class="card mb-4 gradient-custom" style="border-radius: 25px;">
+            <div class="card-body p-4">
+  
+              <div id="demo1" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ul class="carousel-indicators mb-0">
+                  <li data-target="#demo1" data-slide-to="0" class="active"></li>
+                  <li data-target="#demo1" data-slide-to="1"></li>
+                  <li data-target="#demo1" data-slide-to="2"></li>
+                </ul>
+                <!-- Carousel inner -->
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="d-flex justify-content-between mb-4 pb-2">
+                      <div>
+                        <h2 class="display-2"><strong>@(Model.CurrentTemperature)°C</strong></h2>
+                        <p class="text-muted mb-0">@(Model.Location)</p>
+                      </div>
+                      <div>
+                        <img src="@(weatherTypeImg)" width="150px"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+          <div class="card mb-4" style="border-radius: 25px;">
+            <div class="card-body p-4">
+  
+              <div id="demo2" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ul class="carousel-indicators mb-0">
+                  <li data-target="#demo2" data-slide-to="0"></li>
+                  <li data-target="#demo2" data-slide-to="1" class="active"></li>
+                  <li data-target="#demo2" data-slide-to="2"></li>
+                </ul>
+                <!-- Carousel inner -->
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
+                        @foreach(var dailyForecast in Model.DailyForecast)
+                        {      
+                            var weatherClass = dailyForecast.WeatherType switch
+                            {
+                                WeatherType.Sunny => "fa-sun",
+                                WeatherType.Cloudy => "fa-cloud",
+                                WeatherType.Rain => "fa-cloud-showers-heavy",
+                                _ => ""
+                            };
+
+                            <div class="flex-column">
+                                <p class="small"><strong>@(dailyForecast.Temperature)°C</strong></p>
+                                <i class="fas @(weatherClass) fa-2x mb-3" style="color: #ddd;"></i>
+                                <p class="mb-0"><strong>@(dailyForecast.Time.ToString("hh:00", CultureInfo.InvariantCulture))</strong></p>
+                                <p class="mb-0 text-muted" style="font-size: .65rem;">@(dailyForecast.Time.ToString("tt", CultureInfo.InvariantCulture))</p>
+                            </div>      
+                        }
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+          <div class="card" style="border-radius: 25px;">
+            <div class="card-body p-4">
+  
+              <div id="demo3" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ul class="carousel-indicators mb-0">
+                  <li data-target="#demo3" data-slide-to="0"></li>
+                  <li data-target="#demo3" data-slide-to="1"></li>
+                  <li data-target="#demo3" data-slide-to="2" class="active"></li>
+                </ul>
+                <!-- Carousel inner -->
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
+                        @foreach(var weeklyForecast in Model.WeeklyForecast)
+                        {        
+                            var weatherClass = weeklyForecast.WeatherType switch
+                            {
+                                WeatherType.Sunny => "fa-sun",
+                                WeatherType.Cloudy => "fa-cloud",
+                                WeatherType.Rain => "fa-cloud-showers-heavy",
+                                _ => ""
+                            };                 
+                            
+                          <div class="flex-column">
+                            <p class="small"><strong>@(weeklyForecast.Temperature)°C</strong></p>
+                            <i class="fas @(weatherClass) fa-2x mb-3" style="color: #ddd;"></i>
+                            <p class="mb-0"><strong>@(weeklyForecast.DayOfWeek.ToString())</strong></p>
+                          </div>
+                        }
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
