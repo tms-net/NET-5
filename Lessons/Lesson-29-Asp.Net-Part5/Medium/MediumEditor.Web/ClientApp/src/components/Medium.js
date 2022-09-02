@@ -1,122 +1,157 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Input, Button, Label, Col, Alert } from 'reactstrap';
+import MDEditor from '@uiw/react-md-editor';
 
 export class Medium extends Component {
-  static displayName = Medium.name;
+    static displayName = Medium.name;
 
-  constructor(props) {
-    super(props);
-      this.state = {
-        title: '',
-        text: '',
-        isSent: false,
-        isError: false
-      };
-      this.handleTitleChange = this.handleTitleChange.bind(this);
-      this.handleTextChange = this.handleTextChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-  }
+    constructor(props) {
+        super(props);
 
-  handleTitleChange(e) {
-    this.setState({
-      title: e.target.value
-    });
-  }
+        this.state = {
+            title: '',
+            text: '',
+            isSent: false,
+            isError: false,
+            isTitleValid: undefined
+        };
 
-  handleTextChange(e) {
-    this.setState({
-      text: e.target.value
-    });
-  }
+        this.handleTitleChange = this.handleTitleChange.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-  handleSubmit(e) {
-    e.preventDefault();
-
-    fetch('/new-post')
-      .then(response => {
+    handleTitleChange(e) {
         this.setState({
-          title: '',
-          text: '',
-          isSent: true,
-          isError: false
+            title: e.target.value,
+            isTitleValid: !!e.target.value // falsy -- "" ~ false -> !"" === true -> !true == false
         });
-      })
-      .catch(response => {
+    }
+
+    handleTextChange(text) {
         this.setState({
-          isError: true,
-          isSent: false
+            text: text
         });
-      })
+    }
 
-    console.log(this.state);
-  }
+    handleSubmit(e) {
+        e.preventDefault();
 
-  render() {
-    return (
-      <div>
+        if (this.validateFields()) {
+            fetch('/mediumservice',
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify(
+                        {
+                            Title: this.state.title,
+                            Text: this.state.text
+                        })
+                })
+                .then(response => {
+                    if (response.ok) {                        
+                        return response.text();
+                    }
+                    else {
+                        this.setState({
+                            isError: true,
+                            isSent: false
+                        });
+                    }
+                })
+                .then(text => {
+                    this.setState({
+                        title: '',
+                        text: '',
+                        isSent: true,
+                        isError: false,
+                        lastPostLink: text
+                    });
+                })
+                .catch(response => {
+                    this.setState({
+                        isError: true,
+                        isSent: false
+                    });
+                })
+        }
+    }
 
-        <Alert isOpen={this.state.isSent}>
-          Спасибо, статья отправлена!
-        </Alert>
-        
-        <Alert isOpen={this.state.isError} color="danger">
-          Произошла ошибка!
-        </Alert>
+    validateFields() {
+        var isValid = true;
 
-        <Form onSubmit={this.handleSubmit}>
-          <FormGroup row className='mb-3'>
-            <Label for="title" sm={2}>
-              Заголовок
-            </Label>
-            <Col sm={10}>
-              <Input
-                id="title"
-                name="title"
-                type="text"
-                value={this.state.title}
-                onChange={this.handleTitleChange}
-              />
-            </Col>
-          </FormGroup>
-          {' '}
-          <FormGroup row className='mb-3'>
-            <Label for="text" sm={2}>
-              Текст
-            </Label>
-            <Col sm={10}>
-              <Input
-                id="text"
-                name="text"
-                type="textarea"
-                value={this.state.text}
-                onChange={this.handleTextChange} />
-            </Col>
-          </FormGroup>          
-          {' '}
-          <FormGroup row className='mb-3'>
-            <Label for="file" sm={2}>
-              Изображение
-            </Label>
-            <Col sm={10}>
-              <Input
-                id="file"
-                name="file"
-                type="file"
-              />
-            </Col>
-          </FormGroup>          
-          {' '}
-          <Button>
-            Создать
-          </Button>
-          {/* <div>
-            {this.state.title}
-          </div>
-          <div>
-            {this.state.text}
-          </div> */}
-        </Form>
-      </div>
-    );
-  }
+        if (!this.state.title) { // title -> undefined, '', null ...
+            this.setState({
+                isTitleValid: false
+            })
+
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    render() {
+        return (
+            <div>
+
+                <Alert isOpen={this.state.isSent} fade>
+                    Спасибо, <a target="_blank" href={this.state.lastPostLink}>статья</a> отправлена!
+                </Alert>
+
+                <Alert isOpen={this.state.isError} color="danger">
+                    Произошла ошибка!
+                </Alert>
+
+                <Form onSubmit={this.handleSubmit}>
+                    <FormGroup row className='mb-3'>
+                        <Label for="title" sm={2}>
+                            Заголовок
+                        </Label>
+                        <Col sm={10}>
+                            <Input
+                                invalid={this.state.isTitleValid === false ? true : undefined}
+                                id="title"
+                                name="title"
+                                type="text"
+                                value={this.state.title}
+                                onChange={this.handleTitleChange}
+                            />
+                        </Col>
+                    </FormGroup>
+                    {' '}
+                    <FormGroup row className='mb-3'>
+                        <Label for="text" sm={2}>
+                            Текст
+                        </Label>
+                        <Col sm={10}>
+                            <MDEditor
+                                value={this.state.text}
+                                onChange={this.handleTextChange} />
+                            {/*<MDEditor.Markdown source={this.state.text} style={{ whiteSpace: 'pre-wrap' }} />*/}
+                        </Col>
+                    </FormGroup>
+                    {' '}
+                    <FormGroup row className='mb-3'>
+                        <Label for="file" sm={2}>
+                            Изображение
+                        </Label>
+                        <Col sm={10}>
+                            <Input
+                                id="file"
+                                name="file"
+                                type="file"
+                            />
+                        </Col>
+                    </FormGroup>
+                    {' '}
+                    <Button>
+                        Создать
+                    </Button>
+                </Form>
+            </div>
+        );
+    }
 }
