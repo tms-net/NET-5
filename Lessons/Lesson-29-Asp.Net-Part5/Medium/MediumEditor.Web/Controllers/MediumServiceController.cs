@@ -12,6 +12,8 @@ namespace MediumEditor.Web.Controllers
     {
         private readonly Client _mediumClient;
         private readonly Token _mediumToken;
+        private readonly IWebHostEnvironment _appEnvironment;
+        private readonly IFormFile _mediumfile;
 
         public MediumServiceController(IConfiguration configuration)
         {
@@ -20,6 +22,12 @@ namespace MediumEditor.Web.Controllers
             {
                 AccessToken = configuration.GetValue<string>("MediumAccessToken")
             };
+        }
+
+        public MediumServiceController(IFormFile mediumfile, IWebHostEnvironment appEnvironment)
+        {
+            _mediumfile = mediumfile;
+            _appEnvironment = appEnvironment;
         }
 
         [HttpGet]
@@ -56,6 +64,27 @@ namespace MediumEditor.Web.Controllers
              */
 
             return post.Url;
+        }
+
+        public class FileModel
+        {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+        }
+        
+        public async Task<IActionResult> Upload(IFormFile uploadedFile)
+        {
+            if (uploadedFile != null)
+            {
+                string path = "/Files/" + uploadedFile.FileName;
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                FileModel file = new FileModel{Name = uploadedFile.Name, Path = path};
+            }
+            return RedirectToAction("Index");;
         }
     }
 }

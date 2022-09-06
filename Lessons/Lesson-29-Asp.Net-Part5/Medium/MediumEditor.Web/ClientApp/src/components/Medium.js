@@ -143,6 +143,7 @@ export class Medium extends Component {
                                 id="file"
                                 name="file"
                                 type="file"
+                                
                             />
                         </Col>
                     </FormGroup>
