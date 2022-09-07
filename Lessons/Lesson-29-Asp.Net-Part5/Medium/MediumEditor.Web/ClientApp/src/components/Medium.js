@@ -38,28 +38,71 @@ export class Medium extends Component {
         e.preventDefault();
 
         if (this.validateFields()) {
+
+            var file = document.getElementById("file").files[0];
+
+            // key=value&key2=value2
+
+            var data = new FormData();
+            data.append('file', file);
+            data.append('title', this.state.title);
+            data.append('text', this.state.text);
+
+            fetch('/mediumservice/upload',
+                {
+                    headers: {
+                        //'Content-Type': 'multipart/form-data'
+                    },
+                    method: "POST",
+                    body: new FormData(document.getElementsByTagName("form")[0])
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw response.statusText;
+                })
+                .then(text => console.log(text))
+                .catch(e => console.log(e));
+
+            fetch('/mediumservice/upload2',
+                {
+                    method: 'POST',
+                    headers: {
+                        // Content-Type may need to be completely **omitted**
+                        // or you may need something
+                        // "Content-Type": "You will perhaps need to define a content-type here"
+                    },
+                    body: data // This is your file object
+                })
+                .then(response => {
+                    if (response.redirected) {
+                        window.open(response.url, "_blank");
+                    }
+                    else {
+                        console.log(response.statusText)
+                    }
+                });
+
             fetch('/mediumservice',
                 {
                     headers: {
-                        'Content-Type': 'application/json'
+                        //'Content-Type': 'application/json'
                     },
                     method: "POST",
-                    body: JSON.stringify(
-                        {
-                            Title: this.state.title,
-                            Text: this.state.text
-                        })
+                    body: data
+                    //body: JSON.stringify(
+                    //    {
+                    //        Title: this.state.title,
+                    //        Text: this.state.text
+                    //    })
                 })
                 .then(response => {
                     if (response.ok) {                        
                         return response.text();
                     }
-                    else {
-                        this.setState({
-                            isError: true,
-                            isSent: false
-                        });
-                    }
+
+                    throw response.statusText;
                 })
                 .then(text => {
                     this.setState({
