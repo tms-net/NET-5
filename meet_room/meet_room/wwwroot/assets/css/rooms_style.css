@@ -1,0 +1,36 @@
+body{
+    background-color: white;
+    line-height: 1.6;
+    font-size: 25px;
+    color: black;
+    width: 1440px;
+    height: 1024px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+.Rooms
+{
+    font-family: 'Krona One', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 38px;
+    color: black;
+    
+}
+
+.Auth
+{
+    
+}
+
+.header_Auth{
+    
+
+}
+.Auth_text{
+    
+}

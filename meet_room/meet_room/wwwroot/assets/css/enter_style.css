@@ -1,0 +1,98 @@
+body{
+    line-height: 1.6;
+    font-size: 25px;
+    color: black;
+    width: 1440px;
+    height: 1024px;
+    background-color:#EFEFEF ;}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.forget_password{
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    color: #9D9D9D;
+    text-decoration: none;
+    
+}
+
+/* Meet Room */
+.text_meet
+{
+    text-align: center;
+    font-family: 'Krona One', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 38px;
+    color: black;
+}
+
+.text_to_main
+{
+    font-family: 'Raleway',sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 29px;
+}
+
+/* Auth-form */
+.auth_form{
+width: 300px;
+height: 474px;
+left: 570px;
+top: 281px;
+padding-top: 281px ;
+padding-left: 570px;
+}
+
+.enter_text{
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 45px;
+    line-height: 53px;
+    padding-top: 20px;
+}
+
+.enter_logo{
+    text-align: center;
+}
+
+/* Login & Password */
+.login_passsword{
+    text-align: center;
+}
+
+input[type="text"], input[type="password"]
+{
+    width: 300px;
+    height: 60px;
+    font-size: 20px;
+    margin-top: 27px;
+    margin-bottom: 35px;
+    border-radius: 15px;
+    padding-left: 20px;
+}
+/* Кнопка Войти */
+.dws-submit{
+padding: 15px 68px;
+font-family: 'Raleway';
+font-style: normal;
+font-weight: 700;
+font-size: 25px;
+line-height: 29px;
+text-align: center;
+background-color: #fff;
+border: none;
+}
+.dws-submit:hover{
+transition: all 0,5s;
+background: rgb(176, 175, 175);
+color: #fff;
+}

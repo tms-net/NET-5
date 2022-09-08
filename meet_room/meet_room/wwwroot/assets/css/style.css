@@ -1,0 +1,89 @@
+body{
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.6;
+    font-size: 25px;
+    color: black;
+    width: 1440px;
+    height: 1024px;
+    background-color:#EFEFEF ;
+    background-image: url(../images/Chair\ Slider.png);
+    
+     
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.block_raw{
+    display: flex;
+    justify-content: space-between;
+}
+.link{
+    text-decoration: none;
+    color: black;
+    padding: 61px;
+}
+
+
+/*Заголовок*/
+.meet
+{
+    
+    width: 637px;
+    height: 106px;
+    left: 184px;
+    top: 229px;
+
+    padding-left: 184px;
+    padding-top: 229px;
+
+    font-family: 'Krona One' , sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 85px;
+    line-height: 106px;
+}
+
+/* Место твоего потока */
+.meet_2
+{
+
+width: 359px;
+height: 41px;
+left: 190px;
+top: 331px;
+
+padding-left: 190px;
+
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: 500;
+font-size: 35px;
+line-height: 41px;
+}
+
+
+
+
+.dws-submit{
+    padding: 10px 102px;
+    font-family: 'Raleway',sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 29px;
+    text-align: center;
+    background-color: #fff;
+
+    border: none;
+    display: inline-block;
+    margin-left: 193px;
+    margin-top: 52px;
+
+
+    }
+    .dws-submit:hover{
+    transition: all 0,5s;
+    background: rgb(176, 175, 175);
+    color: #fff;
+    }
