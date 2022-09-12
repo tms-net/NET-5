@@ -2,7 +2,22 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Добро пожаловать!!!</h1>
-    <p>Как работает наш сервис.</p>
-</div>
+<header class="header">
+    <div class="block_raw">
+        <div class="block_logo">
+            <a class="logo" href="/">
+                <img src="/assets/images/logo.svg" alt="logo">
+            </a>
+        </div>
+        <div class="block_text">
+            <a class="link" href="#">Контакты</a>
+            <a class="link" href="#">О нас</a>
+            <a class="link" href="#">Галерея</a>
+        </div>
+        <div class="block_enter">
+            <a class="link" 
+                asp-controller="Home"
+                asp-action="Login">Вход</a>
+        </div>
+    </div>
+</header>

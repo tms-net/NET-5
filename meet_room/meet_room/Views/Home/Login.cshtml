@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<header>        
+    <div class="text_to_main"><a href="/">Главная</a></div>
+    <div class="text_meet">Meet Room</div>
+</header>
+<div class="auth_form">
+        <div class="login_passsword">
+            <form method="post">
+                <div class="enter_logo"><img src="/assets/images/logo.svg" width="75px" height="75px" alt="logo"></div>
+                <div class="enter_text">Вход</div>
+                <div class="dws-input">
+                <input type="text" name="username" placeholder="Логин">
+                <input type="password" name="password" placeholder="Пароль">
+                <input class= "dws-submit" type="submit" name="submit" value="Войти"> 
+                <br />
+                <a class="forget_password" href="#">Забыли пароль?</a>
+                </div>
+            </form>
+        </div>
+</div>
