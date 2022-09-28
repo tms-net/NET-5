@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using meet_room.Data;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 using System.Security.Claims;
 
 namespace meet_room.Controllers;
@@ -67,7 +69,27 @@ public class HomeController: Controller
 
     private bool ValidateLogin(string userName, string password)
     {
-        // Проверка в базе
+        using var db = new MeetRoomDbContext();
+
+        var userToValidate = db.Users.FirstOrDefault(user => user.UserName == userName);
+
+        //var users = new List<User>(); // IEnumerable<User>
+        //var dbUsers = db.Users; // IQueryable<User>
+
+        // LINQ
+
+        //var userToValidate = from user in dbUsers // IEnumerable, IQueryable
+        //                     where user.UserName == userName
+        //                     select user;
+
+        //Func<string> lambdaFunc = () => "";
+
+        //Expression<Func<string>> lambdaExp = () => "";
+
+        //lambdaFunc = lambdaExp.Compile();
+
+
+        //userToValidate = users.FirstOrDefault(user => user.UserName == userName);
 
         return true;
     }
