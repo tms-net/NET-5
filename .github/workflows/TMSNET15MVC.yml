@@ -9,7 +9,7 @@ env:
   AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.TMSNET15MVC_8509 }}
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
-  WORKING_DIRECTORY: TMS.NET15.MVC
+  WORKING_DIRECTORY: .\Lessons\Lesson-27-Asp.Net-Part3\TMS.NET15.MVC
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
